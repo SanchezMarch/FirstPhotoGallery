@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FirstPhotoGallery</string>
+
+    <string name="profile_counter_title_photos">photos</string>
+    <string name="profile_counter_title_friends">friends</string>
+    <string name="profile_counter_title_followers">followers</string>
+
 </resources>

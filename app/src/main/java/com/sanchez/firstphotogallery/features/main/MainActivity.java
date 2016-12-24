@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.activity_main, fragment)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
     }
@@ -34,5 +34,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             finish();
         }
+    }
+
+    private int getBackStackCount() {
+        return getSupportFragmentManager().getBackStackEntryCount();
     }
 }

@@ -38,19 +38,52 @@
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/sdvAvatar"
                     android:layout_toRightOf="@id/sdvAvatar"
-                    android:weightSum="3">
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+                    
+                    <com.sanchez.firstphotogallery.features.profile.views.CounterView
+                        android:id="@+id/photoCounter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <com.sanchez.firstphotogallery.features.profile.views.CounterView
+                        android:id="@+id/friendsCounter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"  />
+
+                    <com.sanchez.firstphotogallery.features.profile.views.CounterView
+                        android:id="@+id/followersCounter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"  />
 
                 </LinearLayout>
 
             </RelativeLayout>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tvFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-
     <include layout="@layout/part_toolbar_shadow" />
-
 
 </RelativeLayout>
