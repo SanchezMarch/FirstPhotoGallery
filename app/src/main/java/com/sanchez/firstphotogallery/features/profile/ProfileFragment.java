@@ -22,7 +22,7 @@ import com.sanchez.firstphotogallery.features.profile.views.PhotosFragment;
  * Created by Олександр on 19.12.2016.
  */
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     private SimpleDraweeView sdvAvatar;
     private Toolbar toolbar;
@@ -74,6 +74,8 @@ public class ProfileFragment extends Fragment {
         tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
+        tabLayout.addOnTabSelectedListener(this);
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -104,5 +106,20 @@ public class ProfileFragment extends Fragment {
         adapter.addFragment(new AlbumsFragment(), "Albums");
         adapter.addFragment(new PhotosFragment(), "Photos");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }
