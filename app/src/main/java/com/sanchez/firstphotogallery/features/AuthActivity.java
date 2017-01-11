@@ -17,9 +17,9 @@ import com.sanchez.firstphotogallery.features.prefs.Preferences;
 
 public class AuthActivity extends AppCompatActivity {
 
-    public static void openForResult(Fragment fragment, int requestCode){
-        fragment.startActivityForResult(
-                new Intent(fragment.getActivity(), AuthActivity.class),requestCode);
+    public static void openForResult(Activity activity, int requestCode){
+        activity.startActivityForResult(
+                new Intent(activity, AuthActivity.class),requestCode);
     }
 
     private static final String VK_FIELD_ACCESS_TOKEN = "access_token";
