@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.sanchez.firstphotogallery.R;
+import com.sanchez.firstphotogallery.features.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,12 +18,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        if(getBackStackCount() == 0){
+            replaceFragment(ProfileFragment.newInstance());
         }
+    }
 
     public void replaceFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.activity_main, fragment)
+                .replace(R.id.container, fragment)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
     }

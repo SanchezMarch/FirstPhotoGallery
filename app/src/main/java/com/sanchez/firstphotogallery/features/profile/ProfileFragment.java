@@ -14,15 +14,15 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sanchez.firstphotogallery.R;
 import com.sanchez.firstphotogallery.features.profile.adapters.ViewPagerAdapter;
-import com.sanchez.firstphotogallery.features.profile.views.AlbumsFragment;
+import com.sanchez.firstphotogallery.features.profile.views.AllAlbumsFragment;
 import com.sanchez.firstphotogallery.features.profile.views.CounterView;
-import com.sanchez.firstphotogallery.features.profile.views.PhotosFragment;
+import com.sanchez.firstphotogallery.features.profile.views.AllPhotosFragment;
 
 /**
  * Created by Олександр on 19.12.2016.
  */
 
-public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
+public class ProfileFragment extends Fragment {
 
     private SimpleDraweeView sdvAvatar;
     private Toolbar toolbar;
@@ -54,7 +54,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_profile, container);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 
@@ -70,13 +70,10 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         viewPager = (ViewPager) v.findViewById(R.id.viewPager);
         setupViewPager(viewPager);
 
-
         tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.addOnTabSelectedListener(this);
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return v;
     }
 
     @Override
@@ -103,23 +100,10 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new AlbumsFragment(), "Albums");
-        adapter.addFragment(new PhotosFragment(), "Photos");
+        adapter.addFragment(new AllAlbumsFragment(), "Albums");
+        adapter.addFragment(new AllPhotosFragment(), "Photos");
         viewPager.setAdapter(adapter);
     }
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
 
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
 }
