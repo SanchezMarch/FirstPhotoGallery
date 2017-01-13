@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
             case REQUEST_CODE_AUTHORIZATION:
-                if (requestCode != RESULT_OK)
+                if (resultCode != RESULT_OK)
                     finish();
                 break;
             default:
