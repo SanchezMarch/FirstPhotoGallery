@@ -1,6 +1,7 @@
 package com.sanchez.firstphotogallery;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -12,11 +13,17 @@ import io.realm.Realm;
 
 public class App extends Application {
 
+    private static App instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         Fresco.initialize(this);
         Realm.init(this);
+    }
+
+    public static Context getContext() {
+        return instance.getApplicationContext();
     }
 }

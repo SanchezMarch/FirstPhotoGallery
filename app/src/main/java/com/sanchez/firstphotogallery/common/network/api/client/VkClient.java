@@ -1,6 +1,9 @@
 package com.sanchez.firstphotogallery.common.network.api.client;
 
 import com.google.gson.Gson;
+import com.sanchez.firstphotogallery.App;
+import com.sanchez.firstphotogallery.common.network.api.utils.EnumGsonConverterFactory;
+import com.sanchez.firstphotogallery.features.prefs.Preferences;
 
 import java.io.IOException;
 
@@ -18,6 +21,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class VkClient implements Interceptor {
+
+    private static final String QUERY_API_VERSION = "v";
+    private static final String QUERY_ACCESS_TOKEN = "access_token";
 
     private Retrofit retrofit;
     private Object service;
@@ -42,6 +48,7 @@ public class VkClient implements Interceptor {
                 .baseUrl(Config.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(new EnumGsonConverterFactory())
                 .build();
     }
 
@@ -51,7 +58,8 @@ public class VkClient implements Interceptor {
         HttpUrl originalUrl = original.url();
 
         HttpUrl.Builder urlBuilder = originalUrl.newBuilder();
-        urlBuilder.addQueryParameter("v", Config.VERSION);
+        urlBuilder.addQueryParameter(QUERY_API_VERSION, Config.VERSION);
+        urlBuilder.addQueryParameter(QUERY_ACCESS_TOKEN, Preferences.with(App.getContext()).getAccessToken());
 
         Request.Builder requestBuilder = original.newBuilder()
                 .url(urlBuilder.build());

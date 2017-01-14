@@ -13,10 +13,16 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sanchez.firstphotogallery.R;
+import com.sanchez.firstphotogallery.common.model.user.User;
+import com.sanchez.firstphotogallery.common.repo.Repo;
+import com.sanchez.firstphotogallery.features.prefs.Preferences;
 import com.sanchez.firstphotogallery.features.profile.adapters.ViewPagerAdapter;
+import com.sanchez.firstphotogallery.features.profile.repository.IProfileRepo;
+import com.sanchez.firstphotogallery.features.profile.repository.RetrofitProfileRepo;
 import com.sanchez.firstphotogallery.features.profile.views.AllAlbumsFragment;
 import com.sanchez.firstphotogallery.features.profile.views.CounterView;
 import com.sanchez.firstphotogallery.features.profile.views.AllPhotosFragment;
+import com.sanchez.firstphotogallery.utils.AppUtils;
 
 /**
  * Created by Олександр on 19.12.2016.
@@ -36,6 +42,8 @@ public class ProfileFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    private IProfileRepo profileRepo = new RetrofitProfileRepo();
 
     public ProfileFragment(){
 
@@ -68,7 +76,7 @@ public class ProfileFragment extends Fragment {
         tvStatus = (TextView) v.findViewById(R.id.tvStatus);
 
         viewPager = (ViewPager) v.findViewById(R.id.viewPager);
-        setupViewPager(viewPager);
+        viewPager.setAdapter(new ViewPagerAdapter(getFragmentManager()));
 
         tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -82,20 +90,40 @@ public class ProfileFragment extends Fragment {
 
         toolbar.setTitle("Sanchezzz");
 
-        sdvAvatar.setImageURI("https://pp.vk.me/c421330/v421330591/995c/obaCbDKQsV4.jpg");
-
         photoCounter.setTitle(R.string.profile_counter_title_photos);
-        photoCounter.setCount(1201);
-
         friendsCounter.setTitle(R.string.profile_counter_title_friends);
-        friendsCounter.setCount(1298);
-
         followersCounter.setTitle(R.string.profile_counter_title_followers);
-        followersCounter.setCount(870);
 
-        tvFullNAme.setText("Alekandr Marchuk");
-        tvStatus.setText("https://vk.com/eredan17_ua");
+        loadProfile();
+    }
 
+    private void loadProfile(){
+        profileRepo.getProfile(
+                Preferences.with(getActivity()).getUser(),
+                new Repo.Result<User>() {
+                    @Override
+                    public void response(User user) {
+                        onProfileLoaded(user);
+                    }
+                }, new Repo.Result<Throwable>() {
+                    @Override
+                    public void response(Throwable throwable) {
+                        AppUtils.makeToast(getActivity(), "Something gone wrong", false);
+                    }
+                }
+        );
+    }
+
+    private void onProfileLoaded(User user){
+        if(user != null){
+            sdvAvatar.setImageURI(user.getPhoto());
+            tvFullNAme.setText(user.getFullName());
+            tvStatus.setText(user.getStatus());
+
+            photoCounter.setCount(user.getCounters().getPhotos());
+            friendsCounter.setCount(user.getCounters().getFriends());
+            followersCounter.setCount(user.getCounters().getFollowers());
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
