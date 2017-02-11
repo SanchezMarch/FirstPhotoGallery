@@ -1,6 +1,7 @@
 package com.sanchez.firstphotogallery.common.model.responses.base;
 
 import com.google.gson.annotations.SerializedName;
+import com.sanchez.firstphotogallery.common.model.responses.errors.VkError;
 
 /**
  * Created by Олександр on 13.01.2017.
@@ -12,7 +13,7 @@ public abstract class VkResponse<T> {
     private T response;
 
     @SerializedName("error")
-    private Error error;
+    private VkError error;
 
     public T getResponse(){
         return response;
@@ -22,7 +23,7 @@ public abstract class VkResponse<T> {
         return error == null;
     }
 
-    public Error getError(){
+    public VkError getError(){
         return error;
     }
 }

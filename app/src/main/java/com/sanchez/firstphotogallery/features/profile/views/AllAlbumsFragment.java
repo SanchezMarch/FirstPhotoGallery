@@ -11,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sanchez.firstphotogallery.R;
-import com.sanchez.firstphotogallery.common.model.Photo;
-import com.sanchez.firstphotogallery.common.model.PhotoAlbum;
+import com.sanchez.firstphotogallery.common.model.albums.AlbumItem;
+import com.sanchez.firstphotogallery.common.model.responses.errors.VkError;
+import com.sanchez.firstphotogallery.common.repo.Repo;
+import com.sanchez.firstphotogallery.features.prefs.Preferences;
 import com.sanchez.firstphotogallery.features.profile.adapters.AllAlbumsAdapter;
-import com.sanchez.firstphotogallery.features.profile.adapters.AllPhotosAdapter;
+import com.sanchez.firstphotogallery.features.profile.repository.IAllAlbumsRepo;
+import com.sanchez.firstphotogallery.features.profile.repository.RetrofitAllAlbumsRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +30,12 @@ public class AllAlbumsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AllAlbumsAdapter adapter;
+    private IAllAlbumsRepo allAlbumsRepo = new RetrofitAllAlbumsRepo();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -47,7 +52,20 @@ public class AllAlbumsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        List<PhotoAlbum> albumList = new ArrayList<>();
+        allAlbumsRepo.getAlbums(
+                Preferences.with(getActivity()).getUser(), 0,
+                new Repo.Result<ArrayList<AlbumItem>>() {
+                    @Override
+                    public void response(ArrayList<AlbumItem> albumItems) {
+                        onAlbumsLoaded(albumItems);
+                    }
+                }, new Repo.Result<VkError>(){
+                    @Override
+                    public void response(VkError error) {
+
+                    }
+                }
+        );
 
 
     }
@@ -60,7 +78,7 @@ public class AllAlbumsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void onAlbumsLoaded(List<PhotoAlbum> albums) {
+    private void onAlbumsLoaded(List<AlbumItem> albums) {
         adapter.add(albums);
     }
 }

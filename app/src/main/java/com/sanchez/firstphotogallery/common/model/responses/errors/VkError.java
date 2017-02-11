@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Олександр on 13.01.2017.
  */
 
-public class Error {
+public class VkError {
     @SerializedName("error_code")
     private int errorCode;
 

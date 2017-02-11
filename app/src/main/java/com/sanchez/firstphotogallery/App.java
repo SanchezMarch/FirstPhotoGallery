@@ -18,6 +18,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
 
         Fresco.initialize(this);
         Realm.init(this);
@@ -27,3 +28,11 @@ public class App extends Application {
         return instance.getApplicationContext();
     }
 }
+
+
+// TODO: 10.02.2017  
+        
+//Maps and places
+// AllAlbums  ------> DONE
+// fix Eventbus, BAse activity and ExpiredToken
+// OnePhoto activity

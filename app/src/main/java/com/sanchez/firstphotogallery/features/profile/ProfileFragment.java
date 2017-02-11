@@ -1,5 +1,6 @@
 package com.sanchez.firstphotogallery.features.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -7,14 +8,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sanchez.firstphotogallery.R;
+import com.sanchez.firstphotogallery.common.model.responses.errors.VkError;
 import com.sanchez.firstphotogallery.common.model.user.User;
 import com.sanchez.firstphotogallery.common.repo.Repo;
+import com.sanchez.firstphotogallery.features.nearme.PhotosNearMeActivity;
+import com.sanchez.firstphotogallery.features.places.PlacesActivity;
 import com.sanchez.firstphotogallery.features.prefs.Preferences;
 import com.sanchez.firstphotogallery.features.profile.adapters.ViewPagerAdapter;
 import com.sanchez.firstphotogallery.features.profile.repository.IProfileRepo;
@@ -28,7 +33,7 @@ import com.sanchez.firstphotogallery.utils.AppUtils;
  * Created by Олександр on 19.12.2016.
  */
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
 
     private SimpleDraweeView sdvAvatar;
     private Toolbar toolbar;
@@ -65,6 +70,8 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.profile_menu);
+        toolbar.setOnMenuItemClickListener(this);
 
         sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
 
@@ -76,10 +83,8 @@ public class ProfileFragment extends Fragment {
         tvStatus = (TextView) v.findViewById(R.id.tvStatus);
 
         viewPager = (ViewPager) v.findViewById(R.id.viewPager);
-        viewPager.setAdapter(new ViewPagerAdapter(getFragmentManager()));
-
         tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
+        setupViewPager();
 
         return v;
     }
@@ -105,9 +110,9 @@ public class ProfileFragment extends Fragment {
                     public void response(User user) {
                         onProfileLoaded(user);
                     }
-                }, new Repo.Result<Throwable>() {
+                }, new Repo.Result<VkError>() {
                     @Override
-                    public void response(Throwable throwable) {
+                    public void response(VkError error) {
                         AppUtils.makeToast(getActivity(), "Something gone wrong", false);
                     }
                 }
@@ -126,12 +131,23 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new AllAlbumsFragment(), "Albums");
         adapter.addFragment(new AllPhotosFragment(), "Photos");
         viewPager.setAdapter(adapter);
+
+        tabLayout.setupWithViewPager(viewPager);
     }
 
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_search_by_location: {
+                startActivity(new Intent(getActivity(), PhotosNearMeActivity.class));
+            }
+        }
+        return false;
+    }
 }

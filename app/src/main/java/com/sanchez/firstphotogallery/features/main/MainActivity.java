@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.sanchez.firstphotogallery.R;
-import com.sanchez.firstphotogallery.features.AuthActivity;
+import com.sanchez.firstphotogallery.features.authorization.AuthActivity;
 import com.sanchez.firstphotogallery.features.prefs.Preferences;
 import com.sanchez.firstphotogallery.features.profile.ProfileFragment;
 

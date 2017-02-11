@@ -4,5 +4,18 @@
     <string name="profile_counter_title_photos">photos</string>
     <string name="profile_counter_title_friends">friends</string>
     <string name="profile_counter_title_followers">followers</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="photo_likes">likes</string>
+
+    <string name="photo_coordinate_default">Default</string>
+    <string name="photo_coordinate_set">Set the location</string>
+
+    <string name="api_maps_key">AIzaSyBWrc_kbPRNsO0adV4SZAXiVUkLjAYxcq8</string>
+    <string name="profile">Profile</string>
+    <string name="search_by_my_location">Search by my location</string>
+    <string name="search_anywhere">Search anywhere</string>
+
+
 
 </resources>

@@ -10,10 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.sanchez.firstphotogallery.R;
-import com.sanchez.firstphotogallery.common.model.Photo;
+import com.sanchez.firstphotogallery.common.model.photos.Photo;
+import com.sanchez.firstphotogallery.common.model.responses.errors.VkError;
+import com.sanchez.firstphotogallery.common.repo.Repo;
+import com.sanchez.firstphotogallery.features.prefs.Preferences;
 import com.sanchez.firstphotogallery.features.profile.adapters.AllPhotosAdapter;
+import com.sanchez.firstphotogallery.features.profile.repository.IAllPhotosRepo;
+import com.sanchez.firstphotogallery.features.profile.repository.RetrofitAllPhotosRepo;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +30,7 @@ public class AllPhotosFragment extends Fragment {
 
     private AllPhotosAdapter adapter;
     private RecyclerView recyclerView;
+    private IAllPhotosRepo allPhotosRepo = new RetrofitAllPhotosRepo();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,11 +43,32 @@ public class AllPhotosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all_photos, container, false);
 
         this.recyclerView = (RecyclerView) view.findViewById(R.id.rvPhotos);
+        initRecycler();
 
         return view;
     }
 
-    private void ititRecycler() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        allPhotosRepo.getAllPhotos(
+                Preferences.with(getActivity()).getUser(), 0,
+                new Repo.Result<ArrayList<Photo>>() {
+                    @Override
+                    public void response(ArrayList<Photo> photos) {
+                        onPhotosLoaded(photos);
+                    }
+                }, new Repo.Result<VkError>(){
+                    @Override
+                    public void response(VkError error) {
+
+                    }
+                }
+        );
+
+    }
+
+    private void initRecycler() {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -48,8 +76,8 @@ public class AllPhotosFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void onPhotosLoaded(List<Photo> albums) {
-        adapter.add(albums);
+    private void onPhotosLoaded(List<Photo> photos) {
+        adapter.add(photos);
     }
 
 }

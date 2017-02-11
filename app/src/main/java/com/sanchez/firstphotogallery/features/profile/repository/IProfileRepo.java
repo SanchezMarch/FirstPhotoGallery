@@ -1,5 +1,6 @@
 package com.sanchez.firstphotogallery.features.profile.repository;
 
+import com.sanchez.firstphotogallery.common.model.responses.errors.VkError;
 import com.sanchez.firstphotogallery.common.model.user.User;
 import com.sanchez.firstphotogallery.common.repo.Repo;
 
@@ -11,5 +12,5 @@ public interface IProfileRepo {
 
     void getProfile(long id,
                     Repo.Result<User> onSuccess,
-                    Repo.Result<Throwable> onError);
+                    Repo.Result<VkError> onError);
 }

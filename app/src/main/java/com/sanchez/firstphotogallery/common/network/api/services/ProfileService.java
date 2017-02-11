@@ -16,6 +16,7 @@ public interface ProfileService {
     @GET("users.get")
     Call<UsersResponse> get(
             @Query("user_ids") long[] ids,
+            @Query("access_token") String access_token,
             @Query("fields[]") Field[] fields,
             @Query("name_case") NameCase nameCase
     );
