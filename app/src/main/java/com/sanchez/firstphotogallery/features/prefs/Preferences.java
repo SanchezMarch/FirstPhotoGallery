@@ -54,4 +54,9 @@ public class Preferences {
     public long getUser() {
         return getReader().getLong(KEY_USER_ID, 0);
     }
+
+    public void clearAuthData() {
+        setAccessToken(null);
+        setUser(0);
+    }
 }
