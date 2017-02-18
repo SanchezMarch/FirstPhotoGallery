@@ -12,6 +12,6 @@ import java.util.ArrayList;
 
 public interface IAllAlbumsRepo {
     void getAlbums(long id, int offset,
-    final Repo.Result<ArrayList<AlbumItem>> onSuccess,
-    final Repo.Result<VkError> onError);
+                   final Repo.Result<ArrayList<AlbumItem>> onSuccess,
+                   final Repo.Result<VkError> onError);
 }

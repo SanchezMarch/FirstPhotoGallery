@@ -41,17 +41,17 @@ public class AllAlbumsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_all_albums, container, false);
+        View view = inflater.inflate(R.layout.fragment_all_albums, container, false);
 
         this.recyclerView = (RecyclerView) view.findViewById(R.id.rvAlbums);
         initRecycler();
 
+        loadAlbums();
+
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    private void loadAlbums() {
         allAlbumsRepo.getAlbums(
                 Preferences.with(getActivity()).getUser(), 0,
                 new Repo.Result<ArrayList<AlbumItem>>() {
@@ -59,15 +59,13 @@ public class AllAlbumsFragment extends Fragment {
                     public void response(ArrayList<AlbumItem> albumItems) {
                         onAlbumsLoaded(albumItems);
                     }
-                }, new Repo.Result<VkError>(){
+                }, new Repo.Result<VkError>() {
                     @Override
                     public void response(VkError error) {
 
                     }
                 }
         );
-
-
     }
 
     private void initRecycler() {

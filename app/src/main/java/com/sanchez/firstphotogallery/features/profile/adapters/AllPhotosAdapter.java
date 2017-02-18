@@ -1,6 +1,7 @@
 package com.sanchez.firstphotogallery.features.profile.adapters;
 
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sanchez.firstphotogallery.R;
 import com.sanchez.firstphotogallery.common.model.photos.Photo;
+import com.sanchez.firstphotogallery.features.photoview.PhotoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
         notifyDataSetChanged();
     }
 
-    private String getPhoto(int position){
+    private String getPhoto(int position) {
         String url = "";
 
         url = photoList.get(position).getPhoto807();
@@ -63,7 +65,7 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
     }
 
 
-    class PhotoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class PhotoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private SimpleDraweeView sdvThumb;
 
@@ -77,12 +79,9 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
 
         @Override
         public void onClick(View v) {
-            ArrayList<String> urls = new ArrayList<>();
-            for (Photo photo : photoList){
-                urls.add(photo.getLargestPhoto());
-            }
-
-
+            Intent intent = new Intent(v.getContext(), PhotoActivity.class);
+            intent.putExtra("showPhotos", photoList);
+            v.getContext().startActivity(intent);
         }
     }
 

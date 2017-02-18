@@ -31,8 +31,6 @@ public class App extends Application {
 
 
 // TODO: 10.02.2017  
-        
-//Maps and places
-// AllAlbums  ------> DONE
-// fix Eventbus, BAse activity and ExpiredToken
+
+
 // OnePhoto activity

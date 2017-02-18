@@ -1,6 +1,7 @@
 package com.sanchez.firstphotogallery.features.profile.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,14 +17,14 @@ import java.util.List;
  * Created by Олександр on 26.12.2016.
  */
 
-public class AllAlbumsAdapter extends RecyclerView.Adapter<AllAlbumsAdapter.AlbumsViewHolder>{
+public class AllAlbumsAdapter extends RecyclerView.Adapter<AllAlbumsAdapter.AlbumsViewHolder> {
 
     private List<AlbumItem> photoAlbums = new ArrayList<>();
 
 
     @Override
     public AlbumsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       return new AlbumsViewHolder(View.inflate(parent.getContext(), R.layout.item_photo_album, parent));
+        return new AlbumsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo_album, parent, false));
     }
 
     @Override
@@ -43,11 +44,8 @@ public class AllAlbumsAdapter extends RecyclerView.Adapter<AllAlbumsAdapter.Albu
     }
 
 
-
-
-
     public class AlbumsViewHolder extends RecyclerView.ViewHolder
-    implements View.OnClickListener{
+            implements View.OnClickListener {
 
         public SimpleDraweeView sdvThumb;
         public TextView name;

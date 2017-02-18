@@ -6,7 +6,7 @@ package com.sanchez.firstphotogallery.common.repo;
 
 public abstract class Repo {
 
-    public interface Result<T>{
+    public interface Result<T> {
         void response(T t);
     }
 }

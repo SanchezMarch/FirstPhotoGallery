@@ -13,11 +13,11 @@ public class VkError {
     @SerializedName("error_message")
     private String errorMessage;
 
-    public int getErrorCode(){
+    public int getErrorCode() {
         return errorCode;
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return errorMessage;
     }
 }

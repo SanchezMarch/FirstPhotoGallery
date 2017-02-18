@@ -16,13 +16,13 @@ import java.util.ArrayList;
  */
 
 public class RetrofitAllPhotosRepo extends RetrofitRepo
-        implements IAllPhotosRepo{
+        implements IAllPhotosRepo {
 
     private static final int PHOTOS_TO_LOAD = 200;
 
     private PhotosService photosService;
 
-    public RetrofitAllPhotosRepo(){
+    public RetrofitAllPhotosRepo() {
         this.photosService = VkClient.makeService(PhotosService.class);
     }
 

@@ -16,7 +16,7 @@ public class VkPaginalResponse<T> extends VkResponse<VkPaginalResponse<T>> {
     @SerializedName("items")
     private ArrayList<T> items;
 
-    public int getCount(){
+    public int getCount() {
         return count;
     }
 

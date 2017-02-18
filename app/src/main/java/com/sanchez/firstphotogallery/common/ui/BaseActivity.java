@@ -21,7 +21,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_CODE_AUTHORIZATION:
                 if (resultCode != RESULT_OK) finish();
                 break;
@@ -43,18 +43,17 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onAccessTokenHasExpired(AccessTokenHasExpiredEvent event){
+    public void onAccessTokenHasExpired(AccessTokenHasExpiredEvent event) {
         Preferences.with(this).clearAuthData();
         openAuthActivity();
     }
 
-    protected boolean isAuthorized(){
+    protected boolean isAuthorized() {
         if (Preferences.with(this).getAccessToken() == null
-                ||Preferences.with(this).getUser() == 0 ){
+                || Preferences.with(this).getUser() == 0) {
             openAuthActivity();
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
     private void openAuthActivity() {

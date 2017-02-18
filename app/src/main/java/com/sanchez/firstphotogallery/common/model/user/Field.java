@@ -64,7 +64,6 @@ public enum Field {
     DOMAIN,
 
 
-
     @SerializedName("has_mobile")
     HAS_MOBILE,
 

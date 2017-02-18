@@ -8,6 +8,7 @@ import com.sanchez.firstphotogallery.common.network.api.services.PhotosService;
 import com.sanchez.firstphotogallery.common.network.api.utils.BooleanInt;
 import com.sanchez.firstphotogallery.common.repo.Repo;
 import com.sanchez.firstphotogallery.common.repo.RetrofitRepo;
+
 import java.util.ArrayList;
 
 /**
@@ -15,13 +16,13 @@ import java.util.ArrayList;
  */
 
 public class RetrofitAllAlbumsRepo extends RetrofitRepo
-        implements IAllAlbumsRepo{
+        implements IAllAlbumsRepo {
 
     private static final int ALBUMS_TO_LOAD = 20;
 
     private PhotosService photosService;
 
-    public RetrofitAllAlbumsRepo(){
+    public RetrofitAllAlbumsRepo() {
         this.photosService = VkClient.makeService(PhotosService.class);
     }
 
@@ -34,7 +35,7 @@ public class RetrofitAllAlbumsRepo extends RetrofitRepo
                 BooleanInt.TRUE,
                 offset,
                 ALBUMS_TO_LOAD
-        ).enqueue(new RetrofitRepo.VkCallback<>(new Repo.Result<AlbumResponse>(){
+        ).enqueue(new RetrofitRepo.VkCallback<>(new Repo.Result<AlbumResponse>() {
             @Override
             public void response(AlbumResponse albumResponse) {
                 onSuccess.response(albumResponse.getResponse().getItems());

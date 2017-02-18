@@ -24,7 +24,7 @@ public interface PhotosService {
     );
 
     @GET("photos.getAlbums")
-    Call<AlbumResponse>  getAlbums(
+    Call<AlbumResponse> getAlbums(
             @Query("owner_id") long user_ids,
             @Query("need_system") BooleanInt needSystem,
             @Query("need_covers") BooleanInt needCovers,

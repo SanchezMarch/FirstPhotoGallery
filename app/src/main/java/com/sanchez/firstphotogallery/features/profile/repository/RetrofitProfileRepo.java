@@ -23,7 +23,7 @@ public class RetrofitProfileRepo extends Repo
 
     private ProfileService profileService;
 
-    public RetrofitProfileRepo(){
+    public RetrofitProfileRepo() {
         this.profileService = VkClient.makeService(ProfileService.class);
     }
 

@@ -21,7 +21,7 @@ import com.sanchez.firstphotogallery.R;
 
 public class PlacesActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
-      GoogleApiClient.OnConnectionFailedListener, PlacesRecyclerAdapter.OnPlaceSelectedListener {
+        GoogleApiClient.OnConnectionFailedListener, PlacesRecyclerAdapter.OnPlaceSelectedListener {
 
     public static final String KEY_NAME = "NAME";
     public static final String KEY_ADDRESS = "ADDRESS";
@@ -48,7 +48,7 @@ public class PlacesActivity extends AppCompatActivity
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-        }
+    }
 
     @Override
     protected void onStart() {
@@ -78,7 +78,7 @@ public class PlacesActivity extends AppCompatActivity
         Toast.makeText(this, connectionResult.getErrorMessage(), Toast.LENGTH_LONG).show();
     }
 
-    private void init(){
+    private void init() {
         rvResults.setLayoutManager(new LinearLayoutManager(this));
         rvResults.setItemAnimator(new DefaultItemAnimator());
 
@@ -86,7 +86,7 @@ public class PlacesActivity extends AppCompatActivity
         adapter.setPlaceSelectedListener(this);
         rvResults.setAdapter(adapter);
 
-        tvSearchPlace.addTextChangedListener(new QueryListener(){
+        tvSearchPlace.addTextChangedListener(new QueryListener() {
             @Override
             public void onQueryChanged(String query) {
                 adapter.getFilter().filter(query);

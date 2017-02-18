@@ -15,15 +15,15 @@ public abstract class VkResponse<T> {
     @SerializedName("error")
     private VkError error;
 
-    public T getResponse(){
+    public T getResponse() {
         return response;
     }
 
-    public boolean isSuccessfull(){
+    public boolean isSuccessfull() {
         return error == null;
     }
 
-    public VkError getError(){
+    public VkError getError() {
         return error;
     }
 }

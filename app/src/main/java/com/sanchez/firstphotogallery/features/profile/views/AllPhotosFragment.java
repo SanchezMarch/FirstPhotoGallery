@@ -1,5 +1,6 @@
 package com.sanchez.firstphotogallery.features.profile.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.sanchez.firstphotogallery.R;
 import com.sanchez.firstphotogallery.common.model.photos.Photo;
 import com.sanchez.firstphotogallery.common.model.responses.errors.VkError;
 import com.sanchez.firstphotogallery.common.repo.Repo;
+import com.sanchez.firstphotogallery.features.photoview.PhotoActivity;
 import com.sanchez.firstphotogallery.features.prefs.Preferences;
 import com.sanchez.firstphotogallery.features.profile.adapters.AllPhotosAdapter;
+import com.sanchez.firstphotogallery.features.profile.adapters.IOnItemClickListener;
 import com.sanchez.firstphotogallery.features.profile.repository.IAllPhotosRepo;
 import com.sanchez.firstphotogallery.features.profile.repository.RetrofitAllPhotosRepo;
 
@@ -45,12 +49,14 @@ public class AllPhotosFragment extends Fragment {
         this.recyclerView = (RecyclerView) view.findViewById(R.id.rvPhotos);
         initRecycler();
 
+        loadPhotos();
+
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+
+    private void loadPhotos() {
+
         allPhotosRepo.getAllPhotos(
                 Preferences.with(getActivity()).getUser(), 0,
                 new Repo.Result<ArrayList<Photo>>() {
@@ -58,14 +64,13 @@ public class AllPhotosFragment extends Fragment {
                     public void response(ArrayList<Photo> photos) {
                         onPhotosLoaded(photos);
                     }
-                }, new Repo.Result<VkError>(){
+                }, new Repo.Result<VkError>() {
                     @Override
                     public void response(VkError error) {
 
                     }
                 }
         );
-
     }
 
     private void initRecycler() {
@@ -80,4 +85,17 @@ public class AllPhotosFragment extends Fragment {
         adapter.add(photos);
     }
 
+    IOnItemClickListener onItemClickListener = new IOnItemClickListener() {
+
+        @Override
+        public void onItemClick(View view, int position) {
+            Intent intent = new Intent(getActivity(), PhotoActivity.class);
+
+            startActivity(intent);
+        }
+    };
+
 }
+
+
+

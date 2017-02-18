@@ -19,7 +19,7 @@ public class EnumGsonConverterFactory extends Converter.Factory {
     public Converter<?, String> stringConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         Converter<?, String> converter = null;
         if (type instanceof Class && ((Class<?>) type).isEnum()) {
-            converter = new Converter<Object, String>(){
+            converter = new Converter<Object, String>() {
                 @Override
                 public String convert(Object value) throws IOException {
                     return getSerializedNameValue((Enum) value);

@@ -50,17 +50,19 @@ public class ProfileFragment extends Fragment implements Toolbar.OnMenuItemClick
 
     private IProfileRepo profileRepo = new RetrofitProfileRepo();
 
-    public ProfileFragment(){
+    public ProfileFragment() {
 
     }
 
-    public static ProfileFragment newInstance(){
+    public static ProfileFragment newInstance() {
         return new ProfileFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Nullable
@@ -86,7 +88,11 @@ public class ProfileFragment extends Fragment implements Toolbar.OnMenuItemClick
         tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
         setupViewPager();
 
+        loadProfile();
+
         return v;
+
+
     }
 
     @Override
@@ -98,11 +104,9 @@ public class ProfileFragment extends Fragment implements Toolbar.OnMenuItemClick
         photoCounter.setTitle(R.string.profile_counter_title_photos);
         friendsCounter.setTitle(R.string.profile_counter_title_friends);
         followersCounter.setTitle(R.string.profile_counter_title_followers);
-
-        loadProfile();
     }
 
-    private void loadProfile(){
+    private void loadProfile() {
         profileRepo.getProfile(
                 Preferences.with(getActivity()).getUser(),
                 new Repo.Result<User>() {
@@ -119,8 +123,8 @@ public class ProfileFragment extends Fragment implements Toolbar.OnMenuItemClick
         );
     }
 
-    private void onProfileLoaded(User user){
-        if(user != null){
+    private void onProfileLoaded(User user) {
+        if (user != null) {
             sdvAvatar.setImageURI(user.getPhoto());
             tvFullNAme.setText(user.getFullName());
             tvStatus.setText(user.getStatus());
@@ -143,7 +147,7 @@ public class ProfileFragment extends Fragment implements Toolbar.OnMenuItemClick
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_search_by_location: {
                 startActivity(new Intent(getActivity(), PhotosNearMeActivity.class));
             }

@@ -18,8 +18,9 @@ public class Preferences {
     private Context context;
 
     private static Preferences instance;
-    public static Preferences with(Context context){
-        if (instance == null)  instance = new Preferences(context);
+
+    public static Preferences with(Context context) {
+        if (instance == null) instance = new Preferences(context);
         return instance;
     }
 
@@ -27,11 +28,11 @@ public class Preferences {
         this.context = context;
     }
 
-    public SharedPreferences getReader(){
+    public SharedPreferences getReader() {
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
-    public SharedPreferences.Editor getEditor(){
+    public SharedPreferences.Editor getEditor() {
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE).edit();
     }
 
