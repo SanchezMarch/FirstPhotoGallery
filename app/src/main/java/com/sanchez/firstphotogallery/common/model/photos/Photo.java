@@ -90,11 +90,11 @@ public class Photo implements Parcelable { // extends RealmObject {
         return photoSmall;
     }
 
-    public int getWidth() {
+    public long getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public long getHeight() {
         return height;
     }
 
@@ -106,7 +106,7 @@ public class Photo implements Parcelable { // extends RealmObject {
         return new Date(date);
     }
 
-    public int getPostId() {
+    public long getPostId() {
         return postId;
     }
 
