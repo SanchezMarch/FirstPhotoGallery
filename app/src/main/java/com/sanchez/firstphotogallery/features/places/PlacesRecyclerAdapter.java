@@ -35,7 +35,7 @@ public class PlacesRecyclerAdapter
         implements Filterable {
 
     private static final int MIN_CHARS_COUNT = 3;
-    private static final int TYPE_FILTER = AutocompleteFilter.TYPE_FILTER_ADDRESS;
+    private static final int TYPE_FILTER = AutocompleteFilter.TYPE_FILTER_CITIES;
 
     private Context context;
     private GoogleApiClient googleApiClient;

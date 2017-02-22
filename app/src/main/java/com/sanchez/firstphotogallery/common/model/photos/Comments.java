@@ -9,28 +9,24 @@ import com.google.gson.annotations.SerializedName;
  * Created by Олександр on 18.02.2017.
  */
 
-public class Reposts implements Parcelable {
+public class Comments implements Parcelable {
 
     @SerializedName("count")
     public long count;
 
-    public Reposts() {
-    }
-
-
-    protected Reposts(Parcel in) {
+    protected Comments(Parcel in) {
         count = in.readLong();
     }
 
-    public static final Creator<Reposts> CREATOR = new Creator<Reposts>() {
+    public static final Creator<Comments> CREATOR = new Creator<Comments>() {
         @Override
-        public Reposts createFromParcel(Parcel in) {
-            return new Reposts(in);
+        public Comments createFromParcel(Parcel in) {
+            return new Comments(in);
         }
 
         @Override
-        public Reposts[] newArray(int size) {
-            return new Reposts[size];
+        public Comments[] newArray(int size) {
+            return new Comments[size];
         }
     };
 

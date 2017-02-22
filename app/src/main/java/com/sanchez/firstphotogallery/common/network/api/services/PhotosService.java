@@ -2,6 +2,7 @@ package com.sanchez.firstphotogallery.common.network.api.services;
 
 import com.sanchez.firstphotogallery.common.model.albums.AlbumResponse;
 import com.sanchez.firstphotogallery.common.model.responses.photos.AllPhotosResponse;
+import com.sanchez.firstphotogallery.common.model.responses.photos.PhotosGeoResponse;
 import com.sanchez.firstphotogallery.common.network.api.utils.BooleanInt;
 
 import retrofit2.Call;
@@ -30,6 +31,15 @@ public interface PhotosService {
             @Query("need_covers") BooleanInt needCovers,
             @Query("offset") int offset,
             @Query("count") int count
+    );
+
+    @GET("photos.search")
+    Call<PhotosGeoResponse> getPhotosMapSearch(
+        @Query("lat") double latitude,
+        @Query("long") double longitude,
+        @Query("offset") int offset,
+        @Query("count") int count,
+        @Query("radius") int radius
     );
 }
 

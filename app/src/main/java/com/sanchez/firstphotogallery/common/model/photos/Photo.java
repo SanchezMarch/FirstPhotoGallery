@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.w3c.dom.Comment;
+
 import java.util.Date;
 
 
@@ -54,6 +56,9 @@ public class Photo implements Parcelable { // extends RealmObject {
 
     @SerializedName("reposts")
     private Reposts reposts;
+
+    @SerializedName("comments")
+    private Comments comments;
 
     public long getId() {
         return id;
@@ -118,7 +123,13 @@ public class Photo implements Parcelable { // extends RealmObject {
         return reposts;
     }
 
-    public Photo(){};
+    public Comments getComments() {
+        return comments;
+    }
+
+
+    public Photo() {
+    }
 
     protected Photo(Parcel in) {
         id = in.readLong();
@@ -135,6 +146,7 @@ public class Photo implements Parcelable { // extends RealmObject {
         postId = in.readLong();
         likes = in.readParcelable(getClass().getClassLoader());
         reposts = in.readParcelable(getClass().getClassLoader());
+        comments = in.readParcelable(getClass().getClassLoader());
     }
 
     public static final Creator<Photo> CREATOR = new Creator<Photo>() {
@@ -170,7 +182,8 @@ public class Photo implements Parcelable { // extends RealmObject {
         parcel.writeLong(postId);
         parcel.writeParcelable(likes, flags);
         parcel.writeParcelable(reposts, flags);
-        }
+        parcel.writeParcelable(comments, flags);
+    }
 
 
 }

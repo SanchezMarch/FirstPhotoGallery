@@ -29,8 +29,3 @@ public class App extends Application {
     }
 }
 
-
-// TODO: 10.02.2017  
-
-
-// OnePhoto activity

@@ -1,63 +1,93 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@color/silver">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/sdvPhoto"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            fresco:retryImageScaleType="centerCrop"
-            fresco:placeholderImage="@drawable/nature"/>
+            android:layout_height="500dp"
+            fresco:placeholderImage="@drawable/nature"
+            fresco:retryImageScaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/activity_horizontal_margin">
+            android:layout_margin="@dimen/margin_small"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvTags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/sdvPhoto"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:textColor="@android:color/white"/>
+                android:layout_marginTop="@dimen/margin_small"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_small"
                 android:weightSum="3">
 
                 <CheckBox
                     android:id="@+id/cbLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_weight="1"
                     android:text="@string/photo_likes"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"/>
+                    android:textColor="@color/black" />
 
-                <ImageButton
-                    android:id="@+id/imgBtnComments"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1">
 
-                <ImageButton
-                    android:id="@+id/imgBtnRepost"
+                    <ImageButton
+                        android:id="@+id/imgBtnComments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_chat_bubble_outline_black_24dp"
+                        android:background="@color/silver" />
+
+                    <TextView
+                        android:id="@+id/tvComments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/imgBtnComments"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:textColor="@color/black" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/imgBtnRepost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_ring_volume_black_24dp"
+                        android:background="@color/silver"/>
+
+                    <TextView
+                        android:id="@+id/tvReposts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/imgBtnRepost"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:textColor="@color/black" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 

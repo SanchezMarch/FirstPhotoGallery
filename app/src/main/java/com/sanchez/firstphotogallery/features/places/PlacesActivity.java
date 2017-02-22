@@ -58,8 +58,30 @@ public class PlacesActivity extends AppCompatActivity
 
     @Override
     protected void onStop() {
-        super.onStop();
         googleApiClient.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public void onPlaceSelected(String placeId) {
+        Places.GeoDataApi
+                .getPlaceById(googleApiClient, placeId)
+                .setResultCallback(new ResultCallback<PlaceBuffer>() {
+                    @Override
+                    public void onResult(@NonNull PlaceBuffer places) {
+                        Place place = places.get(0);
+
+                        Intent intent = new Intent();
+                        intent.putExtra(KEY_NAME, place.getName());
+                        intent.putExtra(KEY_ADDRESS, place.getAddress());
+                        intent.putExtra(KEY_LONGITUDE, place.getLatLng().longitude);
+                        intent.putExtra(KEY_LATITUDE, place.getLatLng().latitude);
+                        setResult(RESULT_OK, intent);
+
+                        places.release();
+                        finish();
+                    }
+                });
     }
 
     @Override
@@ -95,26 +117,5 @@ public class PlacesActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onPlaceSelected(String placeId) {
-        Places.GeoDataApi
-                .getPlaceById(googleApiClient, placeId)
-                .setResultCallback(new ResultCallback<PlaceBuffer>() {
-                    @Override
-                    public void onResult(@NonNull PlaceBuffer places) {
-                        Place place = places.get(0);
-
-                        Intent intent = new Intent();
-                        intent.putExtra(KEY_NAME, place.getName());
-                        intent.putExtra(KEY_ADDRESS, place.getAddress());
-                        intent.putExtra(KEY_LONGITUDE, place.getLatLng().longitude);
-                        intent.putExtra(KEY_LATITUDE, place.getLatLng().latitude);
-                        setResult(RESULT_OK, intent);
-
-                        places.release();
-                        finish();
-                    }
-                });
-    }
 }
 

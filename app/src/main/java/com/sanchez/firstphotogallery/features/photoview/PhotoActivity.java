@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class PhotoActivity extends AppCompatActivity {
 
+    public static final String KEY_PHOTOS_LIST = "PhotosList";
+
     private ViewPager photoViewerViewPager;
     private ArrayList<Photo> photoList;
     private int numberOfPhotos;
@@ -21,7 +23,7 @@ public class PhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
 
-        photoList = (ArrayList<Photo>) this.getIntent().getSerializableExtra("showPhotos");
+        photoList = this.getIntent().getParcelableArrayListExtra(KEY_PHOTOS_LIST);
         numberOfPhotos = getIntent().getIntExtra("numberOfPhotos", 0);
 
         photoViewerViewPager = (ViewPager) findViewById(R.id.photoViewerViewPager);

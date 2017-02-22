@@ -99,8 +99,7 @@ public class ProfileFragment extends Fragment implements Toolbar.OnMenuItemClick
     public void onStart() {
         super.onStart();
 
-        toolbar.setTitle("Sanchezzz");
-
+        toolbar.setTitle(R.string.app_name);
         photoCounter.setTitle(R.string.profile_counter_title_photos);
         friendsCounter.setTitle(R.string.profile_counter_title_friends);
         followersCounter.setTitle(R.string.profile_counter_title_followers);

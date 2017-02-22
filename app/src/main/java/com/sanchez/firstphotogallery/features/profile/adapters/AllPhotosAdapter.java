@@ -22,7 +22,7 @@ import java.util.List;
 
 public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.PhotoViewHolder> {
 
-    private List<Photo> photoList = new ArrayList<>();
+    private ArrayList<Photo> photoList = new ArrayList<>();
 
     @Override
     public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -80,7 +80,7 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(v.getContext(), PhotoActivity.class);
-            intent.putExtra("showPhotos", photoList);
+            intent.putParcelableArrayListExtra(PhotoActivity.KEY_PHOTOS_LIST, photoList);
             v.getContext().startActivity(intent);
         }
     }
